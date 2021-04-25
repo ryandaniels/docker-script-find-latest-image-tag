@@ -8,7 +8,8 @@
 # docker image inspect --format '{{json .}}' "$IMAGE_ID" | jq -r '. | {Id: .Id, Digest: .Digest, RepoDigests: .RepoDigests, Labels: .Config.Labels}'
 # If you're not lucky, proceed..
 
-set -euf -o pipefail
+#set -euf -o pipefail
+set -ef -o pipefail
 
 REGISTRY=${REGISTRY:-"https://index.docker.io/v2"}
 REGISTRY_AUTH=${REGISTRY_AUTH:-"https://auth.docker.io"}
