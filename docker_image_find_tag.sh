@@ -32,7 +32,7 @@ show_help () {
   echo "Usage:"
   echo "$0 [-n image name] [-i image-id]"
   echo "Example: $0 -n traefik -i 96c63a7d3e50 -f 1.7"
-  echo "  -n [text]: Image name (Required). '-n traefik' would reference the traefik image"
+  echo "  -n [text]: Image name (Required). '-n traefik' would reference the traefik image or '-n portainer/portainer' for portainer"
   echo "  -i [text]: Image ID. Required if Image ID (Long) (-L) is ommited."
   echo "             Found in 'docker images'. Can also use -i image:tag"
   echo "  -L [text]: Image ID (Long). Required if Image ID (-i) is ommited"
@@ -88,6 +88,7 @@ shift $((OPTIND-1))
 
 if [ -z "$IMAGE_NAME" ]; then
   echo "Requires Image Name"
+  show_help
   exit 1;
 else
   if [[ "$VERBOSE" -eq 1 ]]; then
@@ -102,6 +103,7 @@ fi
 
 if [ -z "$IMAGE_ID_SHORT" ] && [ -z "$IMAGE_ID_LONG" ]; then
   echo "Requires Image ID or Image ID (Long)"
+  show_help
   exit 1;
 fi
 
@@ -116,6 +118,7 @@ if [ -z "$IMAGE_ID_LONG" ]; then
   # Make sure IMAGE_ID_LONG has value (should never happen)
   if [ -z "$IMAGE_ID_LONG" ]; then
     echo "Error: Id of $IMAGE_ID_SHORT is empty"
+    show_help
     exit 1;
   fi
   # podman (tested on v1.7.0 & 1.8.0) omits sha256: from beginning of Id, fix:

@@ -68,12 +68,14 @@ If you are unlucky, continue on..
 
 ## Usage
 
+The Docker image name (-n) must match the name (REPOSITORY) from "docker images". For example "traefik" (which is an "Official" image), or "portainer/portainer".  
+
 ```bash
 ./docker_image_find_tag.sh -h
 Usage:
 ./docker_image_find_tag.sh [-n image name] [-i image-id]
 Example: ./docker_image_find_tag.sh -n traefik -i 96c63a7d3e50 -f 1.7
-  -n [text]: Image name (Required). '-n traefik' would reference the traefik image
+  -n [text]: Image name (Required). '-n traefik' would reference the traefik image or '-n portainer/portainer' for portainer
   -i [text]: Image ID. Required if Image ID (Long) (-L) is ommited.
              Found in 'docker images'. Can also use -i image:tag
   -L [text]: Image ID (Long). Required if Image ID (-i) is ommited
